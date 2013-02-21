@@ -45,6 +45,7 @@ public class fenetreTerrain {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setVisible(true);
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame.getContentPane().setLayout(null);
 		
@@ -53,8 +54,9 @@ public class fenetreTerrain {
 		btnCreeUnTerrain.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new creeTerrain();
 				frame.setVisible(false);
+				new creeTerrain();
+				
 				
 			}
 		});

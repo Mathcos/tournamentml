@@ -10,13 +10,17 @@ import java.awt.SystemColor;
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class creeTerrain {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textFieldNom;
+	private JTextField textFieldType;
 
 	/**
 	 * Launch the application.
@@ -47,23 +51,47 @@ public class creeTerrain {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setVisible(true);
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(158, 55, 173, 22);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		textFieldNom = new JTextField();
+		textFieldNom.setBounds(158, 55, 173, 22);
+		frame.getContentPane().add(textFieldNom);
+		textFieldNom.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(158, 108, 173, 22);
-		frame.getContentPane().add(textField_1);
+		textFieldType = new JTextField();
+		textFieldType.setColumns(10);
+		textFieldType.setBounds(158, 108, 173, 22);
+		frame.getContentPane().add(textFieldType);
 		
 		JButton btnNewButton_2 = new JButton("Creer");
 		btnNewButton_2.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void mouseClicked(MouseEvent e) {
+				
+				String nom = '\''+textFieldNom.getText()+'\'';
+				String type ='\''+textFieldType.getText()+'\'';
+				
+				System.out.println("Insertion dans la table : "+nom+" | "+type+"");
+				
+				Connection con;
+				try {
+					System.out.println("Creation....");
+					con = DriverManager.getConnection("jdbc:mysql://localhost/tournois","root","");
+				
+				Statement stm = con .createStatement();
+//				int max = 0;
+//				ResultSet set = stm.executeQuery("select max(numa) from animal");
+//				set.next();
+//				max = Integer.parseInt(set.getString("max(numa)"));
+//				max++;
+				stm.executeUpdate("insert into terrain values (NULL,"+nom+","+type+");");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					System.out.println("Erreur : "+e1);
+				};
+				
 			}
 		});
 		btnNewButton_2.setBounds(59, 183, 148, 46);
