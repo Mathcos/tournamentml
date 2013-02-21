@@ -183,13 +183,7 @@ public class Creerequipe extends JDialog {
 						String remp3 = '\''+textFieldRemp3.getText()+'\'';
 						System.out.println("Insertion dans la table : "+nomeq+" | "+entraineur+" | "+capitaine+" | ");
 						
-						Connection con;
-						try {
-							System.out.println("Creation....");
-							con = DriverManager.getConnection("jdbc:mysql://localhost/tournois","root","");
 						
-						Statement stm = con .createStatement();
-					}
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
