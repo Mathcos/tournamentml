@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `arbitre` (
   `id_arbitre` int(11) NOT NULL AUTO_INCREMENT,
   `nom_arbitre` varchar(255) NOT NULL,
+  `prenom_arbitre` varchar(255) NOT NULL,
   `id_match` int(11) NOT NULL,
   PRIMARY KEY (`id_arbitre`),
   KEY `id_match` (`id_match`)
