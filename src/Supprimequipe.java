@@ -8,13 +8,19 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class Supprimequipe extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textFieldnumsup;
+	private JTextField textFieldnomsup;
 
 	/**
 	 * Launch the application.
@@ -37,7 +43,7 @@ public class Supprimequipe extends JFrame {
 	 */
 	public Supprimequipe() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 388, 230);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -48,19 +54,38 @@ public class Supprimequipe extends JFrame {
 		label.setBounds(10, 21, 181, 34);
 		contentPane.add(label);
 		
-		textField = new JTextField();
-		textField.setBounds(213, 29, 123, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textFieldnumsup = new JTextField();
+		textFieldnumsup.setBounds(213, 29, 123, 20);
+		contentPane.add(textFieldnumsup);
+		textFieldnumsup.setColumns(10);
 		
 		JButton btnSupprimer = new JButton("Supprimer");
+		btnSupprimer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String numsup = '\''+textFieldnumsup.getText()+'\'';
+				String nomsup = '\''+textFieldnomsup.getText()+'\'';
+				System.out.println("Delete dans la table : "+numsup+" | "+nomsup+" ");
+				
+				Connection con;
+				try {
+					System.out.println("Suppression....");
+					con = DriverManager.getConnection("jdbc:mysql://localhost/tournois","root","");
+				
+				Statement stm = con .createStatement();
+				stm.executeUpdate("delete from equipe where id_equipe= "+numsup+" and nom_equipe= "+nomsup+";");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					System.out.println("Erreur : "+e1);
+				};
+			}
+		});
 		btnSupprimer.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnSupprimer.setBounds(10, 138, 116, 23);
+		btnSupprimer.setBounds(75, 138, 116, 23);
 		contentPane.add(btnSupprimer);
 		
 		JButton btnNewButton = new JButton("Cancel");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnNewButton.setBounds(166, 138, 108, 23);
+		btnNewButton.setBounds(228, 138, 108, 23);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblTapezVotreNom = new JLabel("Tapez votre nom d'\u00E9quipe");
@@ -68,9 +93,9 @@ public class Supprimequipe extends JFrame {
 		lblTapezVotreNom.setBounds(10, 66, 170, 34);
 		contentPane.add(lblTapezVotreNom);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(213, 74, 123, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textFieldnomsup = new JTextField();
+		textFieldnomsup.setBounds(213, 74, 123, 20);
+		contentPane.add(textFieldnomsup);
+		textFieldnomsup.setColumns(10);
 	}
 }
