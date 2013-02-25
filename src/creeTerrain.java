@@ -77,7 +77,7 @@ public class creeTerrain {
 				
 				Connection con;
 				try {
-					System.out.println("Creation....");
+					System.out.println("Creation....Ok");
 					con = DriverManager.getConnection("jdbc:mysql://localhost/tournois","root","");
 				
 				Statement stm = con .createStatement();
@@ -87,10 +87,15 @@ public class creeTerrain {
 //				max = Integer.parseInt(set.getString("max(numa)"));
 //				max++;
 				stm.executeUpdate("insert into terrain values (NULL,"+nom+","+type+");");
+				new SuccesTerrain();
+				frame.setVisible(false);
+				
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					System.out.println("Erreur : "+e1);
 				};
+				
+				
 				
 			}
 		});
