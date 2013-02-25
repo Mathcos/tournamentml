@@ -10,6 +10,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JList;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.SystemColor;
 
 
@@ -57,19 +59,11 @@ public class ListeTerrain {
 		frame.getContentPane().setLayout(null);
 		
 		String[] entetes = {"Prénom", "Nom"};
-		Object[][] donnees = {
-                {"Johnathan", "Sykes"},
-                {"Nicolas", "Van de Kampf"},
-                {"Damien", "Cuthbert"},
-                {"Corinne", "Valance"},
-                {"Emilie", "Schrödinger"},
-                {"Delphine", "Duke"},
-                {"Eric", "Trump"},
-        };
-		table = new JTable(donnees,entetes);
+		DefaultTableModel test = new DefaultTableModel(entetes,2);
+		table = new JTable(test);
 		table.setBackground(SystemColor.controlHighlight);
-		//getContentPane().add(table.getTableHeader(), BorderLayout.NORTH);
-        //getContentPane().add(table, BorderLayout.CENTER);
+		table.setAutoCreateRowSorter(true);
+		table.setCellSelectionEnabled(true);
 		table.setBounds(46, 50, 298, 140);
 		frame.getContentPane().add(table);
 		
