@@ -1,3 +1,5 @@
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -5,23 +7,28 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JTextPane;
-import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.JList;
+import java.awt.SystemColor;
 
 
-public class SuccesTerrain {
+public class ListeTerrain {
 
 	private JFrame frame;
+	private JTable table;
 
 	/**
 	 * Launch the application.
 	 */
+	
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SuccesTerrain window = new SuccesTerrain();
+					ListeTerrain window = new ListeTerrain();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,8 +40,8 @@ public class SuccesTerrain {
 	/**
 	 * Create the application.
 	 */
-	public SuccesTerrain() {
-		System.out.println("test SuccesTerrain");
+	public ListeTerrain() {
+		
 		initialize();
 	}
 
@@ -45,13 +52,26 @@ public class SuccesTerrain {
 		frame = new JFrame();
 		frame.setVisible(true);
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frame.setBounds(100, 100, 332, 247);
+		frame.setBounds(100, 100, 403, 269);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblTerrainsAjouterAvec = new JLabel("Terrains Ajouter avec succes");
-		lblTerrainsAjouterAvec.setBounds(84, 69, 167, 49);
-		frame.getContentPane().add(lblTerrainsAjouterAvec);
+		String[] entetes = {"Prénom", "Nom"};
+		Object[][] donnees = {
+                {"Johnathan", "Sykes"},
+                {"Nicolas", "Van de Kampf"},
+                {"Damien", "Cuthbert"},
+                {"Corinne", "Valance"},
+                {"Emilie", "Schrödinger"},
+                {"Delphine", "Duke"},
+                {"Eric", "Trump"},
+        };
+		table = new JTable(donnees,entetes);
+		table.setBackground(SystemColor.controlHighlight);
+		//getContentPane().add(table.getTableHeader(), BorderLayout.NORTH);
+        //getContentPane().add(table, BorderLayout.CENTER);
+		table.setBounds(46, 50, 298, 140);
+		frame.getContentPane().add(table);
 		
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addMouseListener(new MouseAdapter() {
@@ -61,7 +81,7 @@ public class SuccesTerrain {
 				frame.setVisible(false);
 			}
 		});
-		btnRetour.setBounds(108, 150, 89, 23);
+		btnRetour.setBounds(142, 11, 89, 23);
 		frame.getContentPane().add(btnRetour);
 	}
 }

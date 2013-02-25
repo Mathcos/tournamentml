@@ -70,6 +70,7 @@ public class creeTerrain {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				
 				String nom = '\''+textFieldNom.getText()+'\'';
 				String type ='\''+textFieldType.getText()+'\'';
 				

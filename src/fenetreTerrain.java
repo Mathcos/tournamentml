@@ -60,6 +60,7 @@ public class fenetreTerrain {
 				
 			}
 		});
+		
 		btnCreeUnTerrain.setBounds(107, 39, 142, 55);
 		frame.getContentPane().add(btnCreeUnTerrain);
 		
@@ -72,6 +73,15 @@ public class fenetreTerrain {
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Liste des terrains");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.setVisible(false);
+				new ListeTerrain();
+				
+				
+			}
+		});
 		btnNewButton_1.setBounds(193, 118, 134, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		frame.setBounds(100, 100, 372, 224);
