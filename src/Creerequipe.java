@@ -14,10 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Wrapper;
 
 
 public class Creerequipe extends JDialog {
@@ -60,9 +58,6 @@ public class Creerequipe extends JDialog {
 			{
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
-					/* (non-Javadoc)
-					 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-					 */
 					public void actionPerformed(ActionEvent arg0) {
 						String nomeq = '\''+textFieldnomeq.getText()+'\'';
 						String entrain ='\''+textFieldentrain.getText()+'\'';
@@ -84,27 +79,24 @@ public class Creerequipe extends JDialog {
 						
 						Statement stm = con .createStatement();
 						stm.executeUpdate("insert into equipe values (NULL,"+nomeq+","+entrain+","+capitain+","+nbjoue+",NULL);");
-						ResultSet resulta = stm.executeQuery("select id_equipe from equipe where nom_equipe = "+nomeq+";");
-						System.out.println(resulta);
-//						
-//						stm.executeUpdate("insert into joueur values (NULL,"+joue_1+",NULL,"+nomeq+",NULL);");
-//						stm.executeUpdate("insert into joueur values (NULL,"+joue_2+",NULL,"+nomeq+",NULL);");
-//						stm.executeUpdate("insert into joueur values (NULL,"+joue_3+",NULL,"+nomeq+",NULL);");
-//						stm.executeUpdate("insert into joueur values (NULL,"+joue_4+",NULL,"+nomeq+",NULL);");
-//						stm.executeUpdate("insert into joueur values (NULL,"+joue_5+",NULL,"+nomeq+",NULL);");
-//						
-//						if( textFieldremp_1 != null){
-//							String remp_1 = '\''+textFieldremp_1.getText()+'\'';
-//							stm.executeUpdate("insert into joueur values (NULL,"+remp_1+",NULL,"+nomeq+",NULL);");
-//							}
-//						if( textFieldremp_2 != null){
-//							String remp_2 = '\''+textFieldremp_2.getText()+'\'';
-//							stm.executeUpdate("insert into joueur values (NULL,"+remp_2+",NULL,"+nomeq+",NULL);");
-//							}
-//						if( textFieldremp_3 != null){
-//							String remp_3 = '\''+textFieldremp_3.getText()+'\'';
-//							stm.executeUpdate("insert into joueur values (NULL,"+remp_3+",NULL,"+nomeq+",NULL);");
-//							}
+						stm.executeUpdate("insert into joueur values (NULL,"+joue_1+",NULL,"+nomeq+",NULL);");
+						stm.executeUpdate("insert into joueur values (NULL,"+joue_2+",NULL,"+nomeq+",NULL);");
+						stm.executeUpdate("insert into joueur values (NULL,"+joue_3+",NULL,"+nomeq+",NULL);");
+						stm.executeUpdate("insert into joueur values (NULL,"+joue_4+",NULL,"+nomeq+",NULL);");
+						stm.executeUpdate("insert into joueur values (NULL,"+joue_5+",NULL,"+nomeq+",NULL);");
+						
+						if( textFieldremp_1 != null){
+							String remp_1 = '\''+textFieldremp_1.getText()+'\'';
+							stm.executeUpdate("insert into joueur values (NULL,"+remp_1+",NULL,"+nomeq+",NULL);");
+							}
+						if( textFieldremp_2 != null){
+							String remp_2 = '\''+textFieldremp_2.getText()+'\'';
+							stm.executeUpdate("insert into joueur values (NULL,"+remp_2+",NULL,"+nomeq+",NULL);");
+							}
+						if( textFieldremp_3 != null){
+							String remp_3 = '\''+textFieldremp_3.getText()+'\'';
+							stm.executeUpdate("insert into joueur values (NULL,"+remp_3+",NULL,"+nomeq+",NULL);");
+							}
 						System.out.println("Creation finit");
 						
 						} catch (SQLException e1) {
@@ -118,7 +110,6 @@ public class Creerequipe extends JDialog {
 							}
 					
 					}
-
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
