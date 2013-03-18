@@ -73,6 +73,8 @@ public class Supprimequipe extends JFrame {
 				
 				Statement stm = con .createStatement();
 				stm.executeUpdate("delete from equipe where id_equipe= "+numsup+" and nom_equipe= "+nomsup+";");
+				
+				System.out.println("Suppression finit");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					System.out.println("Erreur : "+e1);

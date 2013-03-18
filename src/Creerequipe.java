@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -79,24 +80,32 @@ public class Creerequipe extends JDialog {
 						
 						Statement stm = con .createStatement();
 						stm.executeUpdate("insert into equipe values (NULL,"+nomeq+","+entrain+","+capitain+","+nbjoue+",NULL);");
-						stm.executeUpdate("insert into joueur values (NULL,"+joue_1+",NULL,"+nomeq+",NULL);");
-						stm.executeUpdate("insert into joueur values (NULL,"+joue_2+",NULL,"+nomeq+",NULL);");
-						stm.executeUpdate("insert into joueur values (NULL,"+joue_3+",NULL,"+nomeq+",NULL);");
-						stm.executeUpdate("insert into joueur values (NULL,"+joue_4+",NULL,"+nomeq+",NULL);");
-						stm.executeUpdate("insert into joueur values (NULL,"+joue_5+",NULL,"+nomeq+",NULL);");
+						
+						ResultSet rs = stm.executeQuery("select id_equipe from equipe where nom_equipe = "+nomeq+";");
+						String id_eq = null;
+						while(rs.next()){
+							id_eq = rs.getString("id_equipe");
+						}
+						
+						stm.executeUpdate("insert into joueur values (NULL,"+joue_1+",NULL,"+nomeq+","+id_eq+");");
+						stm.executeUpdate("insert into joueur values (NULL,"+joue_2+",NULL,"+nomeq+","+id_eq+");");
+						stm.executeUpdate("insert into joueur values (NULL,"+joue_3+",NULL,"+nomeq+","+id_eq+";");
+						stm.executeUpdate("insert into joueur values (NULL,"+joue_4+",NULL,"+nomeq+","+id_eq+");");
+						stm.executeUpdate("insert into joueur values (NULL,"+joue_5+",NULL,"+nomeq+","+id_eq+");");
 						
 						if( textFieldremp_1 != null){
 							String remp_1 = '\''+textFieldremp_1.getText()+'\'';
-							stm.executeUpdate("insert into joueur values (NULL,"+remp_1+",NULL,"+nomeq+",NULL);");
+							stm.executeUpdate("insert into joueur values (NULL,"+remp_1+",NULL,"+nomeq+","+id_eq+");");
 							}
 						if( textFieldremp_2 != null){
 							String remp_2 = '\''+textFieldremp_2.getText()+'\'';
-							stm.executeUpdate("insert into joueur values (NULL,"+remp_2+",NULL,"+nomeq+",NULL);");
+							stm.executeUpdate("insert into joueur values (NULL,"+remp_2+",NULL,"+nomeq+","+id_eq+");");
 							}
 						if( textFieldremp_3 != null){
 							String remp_3 = '\''+textFieldremp_3.getText()+'\'';
-							stm.executeUpdate("insert into joueur values (NULL,"+remp_3+",NULL,"+nomeq+",NULL);");
+							stm.executeUpdate("insert into joueur values (NULL,"+remp_3+",NULL,"+nomeq+","+id_eq+");");
 							}
+						rs.close();
 						System.out.println("Creation finit");
 						
 						} catch (SQLException e1) {
@@ -104,10 +113,6 @@ public class Creerequipe extends JDialog {
 							System.out.println("Erreur : "+e1);
 						};
 						
-						
-						if(textFieldremp_1 != null ){
-							String remp_1 = '\''+textFieldremp_1.getText()+'\'';
-							}
 					
 					}
 				});

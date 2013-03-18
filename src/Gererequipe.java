@@ -11,6 +11,8 @@ import javax.swing.Action;
 import java.awt.event.ActionListener;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class Gererequipe extends JFrame {
@@ -57,18 +59,16 @@ public class Gererequipe extends JFrame {
 		btnCancel.setBounds(37, 179, 133, 23);
 		contentPane.add(btnCancel);
 		
-		JButton btnCrerUnquipe = new JButton("Cr\u00E9er un \u00E9quipe");
-		btnCrerUnquipe.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton btnNewButton = new JButton("Cr\u00E9er un \u00E9quipe");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				new Creerequipe();
+				setVisible(false);
 			}
 		});
-		btnCrerUnquipe.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent arg0) {
-				
-			}
-		});
-		btnCrerUnquipe.setBounds(37, 43, 133, 23);
-		contentPane.add(btnCrerUnquipe);
+		btnNewButton.setBounds(37, 39, 133, 23);
+		contentPane.add(btnNewButton);
 	}
 
 	private class SwingAction extends AbstractAction {
