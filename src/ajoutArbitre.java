@@ -94,7 +94,7 @@ public class ajoutArbitre {
 //				set.next();
 //				max = Integer.parseInt(set.getString("max(numa)"));
 //				max++;
-				stm.executeUpdate("insert into terrain values (NULL,"+nom+","+prenom+",3);");
+				stm.executeUpdate("insert into arbitre values (NULL,"+nom+","+prenom+",3);");
 				new SuccesTerrain();
 				frame.setVisible(false);
 				
