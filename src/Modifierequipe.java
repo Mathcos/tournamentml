@@ -21,6 +21,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class Modifierequipe extends JFrame {
@@ -60,7 +62,7 @@ public class Modifierequipe extends JFrame {
 	 */
 	public Modifierequipe() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 421, 533);
+		setBounds(100, 100, 421, 467);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -69,7 +71,7 @@ public class Modifierequipe extends JFrame {
 		JLabel lblTapezVotreNumro = new JLabel("Tapez votre num\u00E9ro d'\u00E9quipe");
 		lblTapezVotreNumro.setBounds(10, 11, 181, 34);
 		lblTapezVotreNumro.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		contentPane.add(lblTapezVotreNumro);
+	    contentPane.add(lblTapezVotreNumro);
 		
 		textFieldideq = new JTextField();
 		textFieldideq.setBounds(201, 19, 131, 20);
@@ -79,88 +81,90 @@ public class Modifierequipe extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.setBounds(0, 84, 395, 352);
+		panel.setBounds(0, 84, 395, 283);
 		contentPane.add(panel);
-		
-		JLabel label_1 = new JLabel("Nom d'\u00E9quipe");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_1.setBounds(28, 40, 97, 23);
-		panel.add(label_1);
-		
-		textFieldnomeq = new JTextField();
-		textFieldnomeq.setColumns(10);
-		textFieldnomeq.setBounds(166, 43, 86, 20);
-		panel.add(textFieldnomeq);
 		
 		JLabel label_2 = new JLabel("Entraineur d'\u00E9quipe");
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_2.setBounds(28, 74, 132, 23);
+		label_2.setBounds(28, 45, 132, 23);
 		panel.add(label_2);
 		
 		textFieldentraineq = new JTextField();
 		textFieldentraineq.setColumns(10);
-		textFieldentraineq.setBounds(166, 77, 86, 20);
+		textFieldentraineq.setBounds(166, 48, 86, 20);
 		panel.add(textFieldentraineq);
 		
 		JLabel label_3 = new JLabel("Capitaine d'\u00E9quipe");
 		label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_3.setBounds(28, 108, 132, 23);
+		label_3.setBounds(28, 79, 132, 23);
 		panel.add(label_3);
 		
 		textFieldcapitaineq = new JTextField();
 		textFieldcapitaineq.setColumns(10);
-		textFieldcapitaineq.setBounds(166, 111, 86, 20);
+		textFieldcapitaineq.setBounds(166, 82, 86, 20);
 		panel.add(textFieldcapitaineq);
 		
 		JLabel label_4 = new JLabel("Joueur d'\u00E9quipe");
 		label_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_4.setBounds(28, 142, 132, 23);
+		label_4.setBounds(28, 113, 132, 23);
 		panel.add(label_4);
 		
 		textFieldjoue1 = new JTextField();
 		textFieldjoue1.setColumns(10);
-		textFieldjoue1.setBounds(166, 145, 86, 20);
+		textFieldjoue1.setBounds(166, 116, 86, 20);
 		panel.add(textFieldjoue1);
 		
 		textFieldjoue2 = new JTextField();
 		textFieldjoue2.setColumns(10);
-		textFieldjoue2.setBounds(277, 145, 86, 20);
+		textFieldjoue2.setBounds(277, 116, 86, 20);
 		panel.add(textFieldjoue2);
 		
 		textFieldjoue3 = new JTextField();
 		textFieldjoue3.setColumns(10);
-		textFieldjoue3.setBounds(166, 187, 86, 20);
+		textFieldjoue3.setBounds(166, 147, 86, 20);
 		panel.add(textFieldjoue3);
 		
 		textFieldjoue4 = new JTextField();
 		textFieldjoue4.setColumns(10);
-		textFieldjoue4.setBounds(277, 187, 86, 20);
+		textFieldjoue4.setBounds(277, 147, 86, 20);
 		panel.add(textFieldjoue4);
 		
 		textFieldjoue5 = new JTextField();
 		textFieldjoue5.setColumns(10);
-		textFieldjoue5.setBounds(166, 227, 86, 20);
+		textFieldjoue5.setBounds(166, 178, 86, 20);
 		panel.add(textFieldjoue5);
 		
 		JLabel label_5 = new JLabel("Rempla\u00E7ant");
 		label_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_5.setBounds(28, 273, 91, 23);
+		label_5.setBounds(28, 207, 91, 23);
 		panel.add(label_5);
 		
 		textFieldremp1 = new JTextField();
 		textFieldremp1.setColumns(10);
-		textFieldremp1.setBounds(166, 276, 86, 20);
+		textFieldremp1.setBounds(166, 210, 86, 20);
 		panel.add(textFieldremp1);
 		
 		textFieldremp2 = new JTextField();
 		textFieldremp2.setColumns(10);
-		textFieldremp2.setBounds(277, 276, 86, 20);
+		textFieldremp2.setBounds(277, 210, 86, 20);
 		panel.add(textFieldremp2);
 		
 		textFieldremp3 = new JTextField();
 		textFieldremp3.setColumns(10);
-		textFieldremp3.setBounds(166, 308, 86, 20);
+		textFieldremp3.setBounds(166, 241, 86, 20);
 		panel.add(textFieldremp3);
+		
+		JLabel label_1 = new JLabel("Nom d'\u00E9quipe");
+		label_1.setBounds(28, 11, 97, 23);
+		panel.add(label_1);
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		textFieldnomeq = new JTextField();
+		textFieldnomeq.setBounds(166, 14, 86, 20);
+		panel.add(textFieldnomeq);
+		textFieldnomeq.setColumns(10);
+		
+		setVisible(true);
 		
 		JButton btnSeach = new JButton("Search");
 		btnSeach.addActionListener(new ActionListener() {
@@ -282,11 +286,20 @@ public class Modifierequipe extends JFrame {
 				
 			}
 		});
-		btnSauvegarde.setBounds(27, 447, 119, 23);
+		btnSauvegarde.setBounds(23, 378, 119, 23);
 		contentPane.add(btnSauvegarde);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(184, 447, 111, 23);
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new Gererequipe();
+				setVisible(false);
+			}
+		});
+		btnCancel.setBounds(182, 378, 111, 23);
 		contentPane.add(btnCancel);
+		
 	}
+	
 }

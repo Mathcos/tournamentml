@@ -14,6 +14,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class Supprimequipe extends JFrame {
@@ -30,7 +32,7 @@ public class Supprimequipe extends JFrame {
 			public void run() {
 				try {
 					Supprimequipe frame = new Supprimequipe();
-					frame.setVisible(true);
+				    frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,6 +44,8 @@ public class Supprimequipe extends JFrame {
 	 * Create the frame.
 	 */
 	public Supprimequipe() {
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 388, 230);
 		contentPane = new JPanel();
@@ -86,6 +90,13 @@ public class Supprimequipe extends JFrame {
 		contentPane.add(btnSupprimer);
 		
 		JButton btnNewButton = new JButton("Cancel");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new Gererequipe();
+				setVisible(false);
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnNewButton.setBounds(228, 138, 108, 23);
 		contentPane.add(btnNewButton);
@@ -99,5 +110,7 @@ public class Supprimequipe extends JFrame {
 		textFieldnomsup.setBounds(213, 74, 123, 20);
 		contentPane.add(textFieldnomsup);
 		textFieldnomsup.setColumns(10);
+		
+		setVisible(true);
 	}
 }

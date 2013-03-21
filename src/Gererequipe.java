@@ -28,7 +28,7 @@ public class Gererequipe extends JFrame {
 			public void run() {
 				try {
 					Gererequipe frame = new Gererequipe();
-					frame.setVisible(true);
+				 frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -40,6 +40,7 @@ public class Gererequipe extends JFrame {
 	 * Create the frame.
 	 */
 	public Gererequipe() {
+		JFrame frame= new JFrame();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 227, 301);
 		contentPane = new JPanel();
@@ -48,14 +49,35 @@ public class Gererequipe extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnModifierUnquipe = new JButton("Modifier un \u00E9quipe");
+		btnModifierUnquipe.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				new Modifierequipe();
+				setVisible(false);
+			}
+		});
 		btnModifierUnquipe.setBounds(37, 90, 133, 23);
 		contentPane.add(btnModifierUnquipe);
 		
 		JButton btnSupprimerUnquipe = new JButton("Supprimer un \u00E9quipe");
+		btnSupprimerUnquipe.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new Supprimequipe();
+				setVisible(false);
+			}
+		});
 		btnSupprimerUnquipe.setBounds(37, 135, 133, 23);
 		contentPane.add(btnSupprimerUnquipe);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				setVisible(false);
+			}
+		});
 		btnCancel.setBounds(37, 179, 133, 23);
 		contentPane.add(btnCancel);
 		
@@ -69,6 +91,8 @@ public class Gererequipe extends JFrame {
 		});
 		btnNewButton.setBounds(37, 39, 133, 23);
 		contentPane.add(btnNewButton);
+		
+		setVisible(true);
 	}
 
 	private class SwingAction extends AbstractAction {

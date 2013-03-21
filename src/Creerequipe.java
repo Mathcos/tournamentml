@@ -3,6 +3,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -17,6 +18,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class Creerequipe extends JDialog {
@@ -31,6 +34,8 @@ public class Creerequipe extends JDialog {
 	private JTextField textFieldremp_1;
 	private JTextField textFieldremp_2;
 	private JTextField textFieldremp_3;
+	private JLabel lblLeIdDe;
+	private JTextField textFieldidequipe;
 
 	/**
 	 * Launch the application.
@@ -39,7 +44,7 @@ public class Creerequipe extends JDialog {
 		try {
 			Creerequipe dialog = new Creerequipe();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			// dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,13 +54,15 @@ public class Creerequipe extends JDialog {
 	 * Create the dialog.
 	 */
 	public Creerequipe() {
-		setBounds(100, 100, 398, 485);
-		getContentPane().setLayout(null);
+		final JFrame frame= new JFrame();
+		
+		frame.setBounds(100, 100, 398, 469);
+		frame.getContentPane().setLayout(null);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(10, 403, 372, 33);
+			buttonPane.setBounds(10, 339, 372, 33);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane);
+			frame.getContentPane().add(buttonPane);
 			{
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
@@ -63,7 +70,7 @@ public class Creerequipe extends JDialog {
 						String nomeq = '\''+textFieldnomeq.getText()+'\'';
 						String entrain ='\''+textFieldentrain.getText()+'\'';
 						String capitain = '\''+textFieldcapitain.getText()+'\'';
-						String nbjoue = '\''+"9"+'\'';
+						
 						System.out.println("Insertion dans la table : "+nomeq+" | "+entrain+" | "+capitain+" ");
 						
 						String joue_1 = '\''+textFieldjoue_1.getText()+'\'';
@@ -79,7 +86,7 @@ public class Creerequipe extends JDialog {
 							con = DriverManager.getConnection("jdbc:mysql://localhost/tournois","root","");
 						
 						Statement stm = con .createStatement();
-						stm.executeUpdate("insert into equipe values (NULL,"+nomeq+","+entrain+","+capitain+","+nbjoue+",NULL);");
+						stm.executeUpdate("insert into equipe values (NULL,"+nomeq+","+entrain+","+capitain+",9,NULL);");
 						
 						ResultSet rs = stm.executeQuery("select id_equipe from equipe where nom_equipe = "+nomeq+";");
 						String id_eq = null;
@@ -89,7 +96,7 @@ public class Creerequipe extends JDialog {
 						
 						stm.executeUpdate("insert into joueur values (NULL,"+joue_1+",NULL,"+nomeq+","+id_eq+");");
 						stm.executeUpdate("insert into joueur values (NULL,"+joue_2+",NULL,"+nomeq+","+id_eq+");");
-						stm.executeUpdate("insert into joueur values (NULL,"+joue_3+",NULL,"+nomeq+","+id_eq+";");
+						stm.executeUpdate("insert into joueur values (NULL,"+joue_3+",NULL,"+nomeq+","+id_eq+");");
 						stm.executeUpdate("insert into joueur values (NULL,"+joue_4+",NULL,"+nomeq+","+id_eq+");");
 						stm.executeUpdate("insert into joueur values (NULL,"+joue_5+",NULL,"+nomeq+","+id_eq+");");
 						
@@ -105,6 +112,7 @@ public class Creerequipe extends JDialog {
 							String remp_3 = '\''+textFieldremp_3.getText()+'\'';
 							stm.executeUpdate("insert into joueur values (NULL,"+remp_3+",NULL,"+nomeq+","+id_eq+");");
 							}
+						textFieldidequipe.setText(id_eq);
 						rs.close();
 						System.out.println("Creation finit");
 						
@@ -122,6 +130,13 @@ public class Creerequipe extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						new Gererequipe();
+						frame.setVisible(false);
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -130,95 +145,98 @@ public class Creerequipe extends JDialog {
 		JLabel lblCrerVotrequipe = new JLabel("Cr\u00E9er votre \u00E9quipe");
 		lblCrerVotrequipe.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblCrerVotrequipe.setBounds(58, 11, 128, 25);
-		getContentPane().add(lblCrerVotrequipe);
+		frame.getContentPane().add(lblCrerVotrequipe);
 		
 		JLabel lblNomDquipe = new JLabel("Nom d'\u00E9quipe");
 		lblNomDquipe.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNomDquipe.setBounds(10, 53, 98, 24);
-		getContentPane().add(lblNomDquipe);
+		frame.getContentPane().add(lblNomDquipe);
 		
 		textFieldnomeq = new JTextField();
 		textFieldnomeq.setBounds(143, 57, 86, 20);
-		getContentPane().add(textFieldnomeq);
+		frame.getContentPane().add(textFieldnomeq);
 		textFieldnomeq.setColumns(10);
 		
 		JLabel lblEntraineDquipe = new JLabel("Entraine d'\u00E9quipe");
 		lblEntraineDquipe.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblEntraineDquipe.setBounds(10, 88, 115, 24);
-		getContentPane().add(lblEntraineDquipe);
+		frame.getContentPane().add(lblEntraineDquipe);
 		
 		textFieldentrain = new JTextField();
 		textFieldentrain.setBounds(143, 92, 86, 20);
-		getContentPane().add(textFieldentrain);
+		frame.getContentPane().add(textFieldentrain);
 		textFieldentrain.setColumns(10);
 		
 		JLabel lblCapitaineDquipe = new JLabel("Capitaine d'\u00E9quipe");
 		lblCapitaineDquipe.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCapitaineDquipe.setBounds(10, 123, 115, 20);
-		getContentPane().add(lblCapitaineDquipe);
+		frame.getContentPane().add(lblCapitaineDquipe);
 		
 		textFieldcapitain = new JTextField();
 		textFieldcapitain.setBounds(143, 125, 86, 20);
-		getContentPane().add(textFieldcapitain);
+		frame.getContentPane().add(textFieldcapitain);
 		textFieldcapitain.setColumns(10);
-		
-		JLabel lblNombreDeJoueurs = new JLabel("Nombre de joueur");
-		lblNombreDeJoueurs.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNombreDeJoueurs.setBounds(10, 161, 115, 25);
-		getContentPane().add(lblNombreDeJoueurs);
-		
-		JSpinner spinnernbjoue = new JSpinner();
-		spinnernbjoue.setBounds(143, 165, 86, 21);
-		getContentPane().add(spinnernbjoue);
 		
 		JLabel lblJoueur = new JLabel("Joueur");
 		lblJoueur.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblJoueur.setBounds(10, 207, 73, 14);
-		getContentPane().add(lblJoueur);
+		lblJoueur.setBounds(10, 170, 73, 14);
+		frame.getContentPane().add(lblJoueur);
 		
 		textFieldjoue_1 = new JTextField();
-		textFieldjoue_1.setBounds(143, 206, 86, 20);
-		getContentPane().add(textFieldjoue_1);
+		textFieldjoue_1.setBounds(143, 169, 86, 20);
+		frame.getContentPane().add(textFieldjoue_1);
 		textFieldjoue_1.setColumns(10);
 		
 		textFieldjoue_2 = new JTextField();
-		textFieldjoue_2.setBounds(262, 206, 86, 20);
-		getContentPane().add(textFieldjoue_2);
+		textFieldjoue_2.setBounds(262, 169, 86, 20);
+		frame.getContentPane().add(textFieldjoue_2);
 		textFieldjoue_2.setColumns(10);
 		
 		textFieldjoue_3 = new JTextField();
-		textFieldjoue_3.setBounds(143, 237, 86, 20);
-		getContentPane().add(textFieldjoue_3);
+		textFieldjoue_3.setBounds(143, 200, 86, 20);
+		frame.getContentPane().add(textFieldjoue_3);
 		textFieldjoue_3.setColumns(10);
 		
 		textFieldjoue_4 = new JTextField();
-		textFieldjoue_4.setBounds(262, 237, 86, 20);
-		getContentPane().add(textFieldjoue_4);
+		textFieldjoue_4.setBounds(262, 200, 86, 20);
+		frame.getContentPane().add(textFieldjoue_4);
 		textFieldjoue_4.setColumns(10);
 		
 		textFieldjoue_5 = new JTextField();
-		textFieldjoue_5.setBounds(143, 268, 86, 20);
-		getContentPane().add(textFieldjoue_5);
+		textFieldjoue_5.setBounds(143, 231, 86, 20);
+		frame.getContentPane().add(textFieldjoue_5);
 		textFieldjoue_5.setColumns(10);
 		
 		JLabel lblRemplaant = new JLabel("Rempla\u00E7ant");
 		lblRemplaant.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblRemplaant.setBounds(10, 307, 73, 14);
-		getContentPane().add(lblRemplaant);
+		lblRemplaant.setBounds(10, 268, 73, 14);
+		frame.getContentPane().add(lblRemplaant);
 		
 		textFieldremp_1 = new JTextField();
-		textFieldremp_1.setBounds(143, 306, 86, 20);
-		getContentPane().add(textFieldremp_1);
+		textFieldremp_1.setBounds(143, 267, 86, 20);
+		frame.getContentPane().add(textFieldremp_1);
 		textFieldremp_1.setColumns(10);
 		
 		textFieldremp_2 = new JTextField();
-		textFieldremp_2.setBounds(262, 306, 86, 20);
-		getContentPane().add(textFieldremp_2);
+		textFieldremp_2.setBounds(262, 267, 86, 20);
+		frame.getContentPane().add(textFieldremp_2);
 		textFieldremp_2.setColumns(10);
 		
 		textFieldremp_3 = new JTextField();
-		textFieldremp_3.setBounds(143, 349, 86, 20);
-		getContentPane().add(textFieldremp_3);
+		textFieldremp_3.setBounds(143, 308, 86, 20);
+		frame.getContentPane().add(textFieldremp_3);
 		textFieldremp_3.setColumns(10);
+		
+		lblLeIdDe = new JLabel("Le ID de votre \u00E9quipe");
+		lblLeIdDe.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblLeIdDe.setBounds(20, 393, 153, 14);
+		frame.getContentPane().add(lblLeIdDe);
+		
+		textFieldidequipe = new JTextField();
+		textFieldidequipe.setBounds(183, 392, 86, 20);
+		frame.getContentPane().add(textFieldidequipe);
+		textFieldidequipe.setColumns(10);
+
+		frame.setVisible(true);
 	}
 }
