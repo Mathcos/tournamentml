@@ -78,8 +78,7 @@ public class fenetreTerrain {
 			public void mouseClicked(MouseEvent e) {
 				frame.setVisible(false);
 				new ListeTerrain();
-				
-				
+			
 			}
 		});
 		btnNewButton_1.setBounds(193, 118, 134, 23);
