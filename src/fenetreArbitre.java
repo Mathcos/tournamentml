@@ -41,6 +41,7 @@ public class fenetreArbitre {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setVisible(true);
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame.setBounds(100, 100, 335, 271);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

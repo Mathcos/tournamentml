@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -113,6 +115,13 @@ public class ajoutArbitre {
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Retour");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new fenetreArbitre();
+				frame.setVisible(false);
+			}
+		});
 		btnNewButton_1.setBounds(217, 182, 147, 43);
 		frame.getContentPane().add(btnNewButton_1);
 	}
